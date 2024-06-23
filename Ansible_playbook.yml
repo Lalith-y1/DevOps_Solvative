@@ -1,0 +1,47 @@
+- name: 'Install Docker, Apache2, MySQL'
+  hosts: Solvative_host
+  tasks:
+    - name: Update apt package manager
+      become: true
+      apt: update yes
+    - name: Install Docker
+      become: true
+      apt:
+        name: >-
+          docker.io docker-doc docker-compose docker-compose-v2 podman-docker
+          containerd
+        state: present
+    - name: Install Apache2
+      become: 'yes'
+      apt:
+        name: apache2
+        state: present
+    - name: Install MySQL
+      become: 'yes'
+      apt:
+        name: mysql-server
+        state: present
+    - name: Pull Apache2 Docker image
+      docker_image:
+        name: httpd
+        source: pull
+    - name: Creating ephemeral storage directory
+      ansible.builtin.file:
+        path: null
+        state: directory
+        mode: '0755'
+        recurse: 'yes'
+    - name: Starting Apache2 Docker container with ephemeral storage
+      docker_container:
+        name: my-apache-container
+        image: httpd
+        state: started
+        volumes:
+          - '/path/on/host:/usr/local/apache2/htdocs'
+        ports:
+          - '80:80'
+          
+          
+ ##Use this command to run the above yaml file 
+ ##ansible-playbook -i Solvative_host Ansible_playbook.yml
+
