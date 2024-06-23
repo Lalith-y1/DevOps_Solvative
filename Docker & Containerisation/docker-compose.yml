@@ -1,0 +1,10 @@
+version: '1'
+services:
+  nginx-webserver:
+    image: nginx:latest
+    container_name: my-nginx-container
+    ports:
+      - "8080:80"
+    volumes:
+      - ./path/to/your/web-app:/usr/share/nginx/html
+    restart: always

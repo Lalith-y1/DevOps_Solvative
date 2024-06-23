@@ -1,0 +1,10 @@
+FROM nginx:latest
+
+RUN rm -rf /usr/share/nginx/html/*
+
+COPY ./path/to/your/web-app /usr/share/nginx/html/
+
+EXPOSE 80
+
+# Start NGINX 
+CMD ["nginx", "-g", "daemon off;"]
