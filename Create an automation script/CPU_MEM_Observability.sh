@@ -1,5 +1,4 @@
 #!/bin/bash
-
 # Function to display CPU and memory usage
 function display_usage {
     echo "CPU and Memory Usage:"
@@ -20,5 +19,7 @@ function list_top_processes {
 # Main execution
 display_usage
 list_top_processes
+
+#We can run the script with filename.sh 
 
 
