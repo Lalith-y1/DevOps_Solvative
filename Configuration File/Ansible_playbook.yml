@@ -27,7 +27,7 @@
         source: pull
     - name: Creating ephemeral storage directory
       ansible.builtin.file:
-        path: null
+        path: /path/to/host
         state: directory
         mode: '0755'
         recurse: 'yes'
